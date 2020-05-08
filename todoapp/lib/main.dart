@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoapp/providers/proejct_data.dart';
 import 'package:todoapp/providers/task_data.dart';
-import 'package:todoapp/screens/tasks_screen.dart';
+import 'package:todoapp/screens/navigator_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,11 +11,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Everything related to Tasks is handled by TaskData.
     /// Provider is used for State Management Helper.
-    return ChangeNotifierProvider(
-      create: (_) => TaskData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TaskData()),
+        ChangeNotifierProvider(create: (_) => ProjectData()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: TasksScreen(),
+        home: NavigatorScreen(),
       ),
     );
   }

@@ -12,8 +12,8 @@ class CircularAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 75.0,
-      height: 75.0,
+      width: 65.0,
+      height: 65.0,
       decoration: new BoxDecoration(
         border: Border.all(color: Color(0xFFE8C590), width: 3.0),
         shape: BoxShape.circle,

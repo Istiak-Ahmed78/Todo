@@ -7,7 +7,14 @@ import 'package:todoapp/services/datetime.dart';
 import 'add_task_screen.dart';
 import 'package:todoapp/providers/task_data.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +131,9 @@ class TasksScreen extends StatelessWidget {
       ),
 
       ///Work needed
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
+        onTap: (index) => setState(() => this.index = index),
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.playlist_add), title: Text("")),
@@ -132,7 +141,7 @@ class TasksScreen extends StatelessWidget {
               icon: Icon(Icons.developer_board), title: Text("")),
           BottomNavigationBarItem(icon: Icon(Icons.person), title: Text("")),
         ],
-      ),
+      ),*/
     );
   }
 }
