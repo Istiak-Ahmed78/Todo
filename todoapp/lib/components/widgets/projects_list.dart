@@ -86,6 +86,12 @@ class ProjectsList extends StatelessWidget {
                                   project: projectData.projectLists[index],
                                 )));
               },
+              onLongPress: () {
+                addProjectChecker
+                    ? Container()
+                    : projectData
+                        .deleteProject(projectData.projectLists[index]);
+              },
             );
           },
         );

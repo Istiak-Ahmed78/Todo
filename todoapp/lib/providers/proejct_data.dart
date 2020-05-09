@@ -28,9 +28,15 @@ class ProjectData extends ChangeNotifier {
     ),
   ];
 
-  void addProject(String newProjectTitle) {
-    final project = Project(name: newProjectTitle);
+  void addProject({String newProjectTitle, String newProjectDescription}) {
+    final project =
+        Project(name: newProjectTitle, description: newProjectDescription);
     _projectLists.insert(0, project);
+    notifyListeners();
+  }
+
+  void deleteProject(Project project) {
+    _projectLists.remove(project);
     notifyListeners();
   }
 

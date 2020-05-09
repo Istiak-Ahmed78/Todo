@@ -6,6 +6,7 @@ class AddProjectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String projectTitle;
+    String projectDescription;
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -73,7 +74,9 @@ class AddProjectScreen extends StatelessWidget {
                 ),
               ),
               textAlign: TextAlign.start,
-              //onChanged: (newProject) {},
+              onChanged: (description) {
+                projectDescription = description;
+              },
             ),
             SizedBox(height: 10),
             MaterialButton(
@@ -85,8 +88,9 @@ class AddProjectScreen extends StatelessWidget {
               height: 45,
               color: Colors.blue[500],
               onPressed: () {
-                Provider.of<ProjectData>(context, listen: false)
-                    .addProject(projectTitle);
+                Provider.of<ProjectData>(context, listen: false).addProject(
+                    newProjectTitle: projectTitle,
+                    newProjectDescription: projectDescription);
                 Navigator.pop(context);
               },
             )
