@@ -8,5 +8,10 @@ class Project {
   int numberOfTasks;
   int numberOfTeamMember;
 
-  Project({this.name, this.backgroundColor, this.iconData, this.description});
+  Project({
+    this.name,
+    this.backgroundColor = Colors.lightBlueAccent,
+    this.iconData = Icons.border_color,
+    this.description,
+  });
 }

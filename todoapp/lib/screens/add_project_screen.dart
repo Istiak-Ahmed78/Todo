@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/task_data.dart';
+import 'package:todoapp/providers/proejct_data.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddProjectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String taskTitle;
+    String projectTitle;
     return Container(
       color: Color(0xFF757575),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -19,11 +18,11 @@ class AddTaskScreen extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
-              "ADD TASK",
+              "Add Project",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -36,14 +35,15 @@ class AddTaskScreen extends StatelessWidget {
                   filled: true,
                   fillColor: Colors.black12,
                   border: InputBorder.none,
-                  labelText: "Task Name",
+                  labelText: "Project Name",
                   labelStyle: TextStyle(color: Colors.black, fontSize: 15)),
               textAlign: TextAlign.start,
               cursorWidth: 2.0,
-              onChanged: (newTask) {
-                taskTitle = newTask;
+              onChanged: (newProject) {
+                projectTitle = newProject;
               },
             ),
+            SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(
                   filled: true,
@@ -53,42 +53,15 @@ class AddTaskScreen extends StatelessWidget {
                   labelStyle: TextStyle(color: Colors.black, fontSize: 15)),
               textAlign: TextAlign.start,
               cursorWidth: 2.0,
-              onChanged: (newProject) {},
+              //onChanged: (newProject) {},
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black12,
-                          border: InputBorder.none,
-                          //icon: Icon(Icons.category),
-                          labelText: "Add Category"),
-                      textAlign: TextAlign.start,
-                      onChanged: (newProject) {},
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black12,
-                          border: InputBorder.none,
-                          //icon: Icon(Icons.priority_high),
-                          labelText: "Add Priority"),
-                      textAlign: TextAlign.start,
-                      onChanged: (newProject) {},
-                    ),
-                  ),
-                ),
-              ],
+            TextField(
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(Icons.person_outline),
+                  labelText: "Add others in this project"),
+              textAlign: TextAlign.start,
+              //onChanged: (newProject) {},
             ),
             TextField(
               decoration: InputDecoration(
@@ -100,11 +73,11 @@ class AddTaskScreen extends StatelessWidget {
                 ),
               ),
               textAlign: TextAlign.start,
-              onChanged: (newProject) {},
+              //onChanged: (newProject) {},
             ),
             SizedBox(height: 10),
             MaterialButton(
-              child: Text("Create Task",
+              child: Text("Create Project",
                   style: TextStyle(fontSize: 20.0, color: Colors.white)),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22.0)),
@@ -112,11 +85,11 @@ class AddTaskScreen extends StatelessWidget {
               height: 45,
               color: Colors.blue[500],
               onPressed: () {
-                Provider.of<TaskData>(context, listen: false)
-                    .addTask(taskTitle);
+                Provider.of<ProjectData>(context, listen: false)
+                    .addProject(projectTitle);
                 Navigator.pop(context);
               },
-            ),
+            )
           ],
         ),
       ),

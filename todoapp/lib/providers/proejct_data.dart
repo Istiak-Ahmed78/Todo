@@ -28,6 +28,12 @@ class ProjectData extends ChangeNotifier {
     ),
   ];
 
+  void addProject(String newProjectTitle) {
+    final project = Project(name: newProjectTitle);
+    _projectLists.insert(0, project);
+    notifyListeners();
+  }
+
   int get projectCount => projectLists.length;
 
   UnmodifiableListView<Project> get projectLists =>

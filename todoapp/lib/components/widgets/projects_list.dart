@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/providers/proejct_data.dart';
+import 'package:todoapp/screens/add_project_screen.dart';
 import 'package:todoapp/screens/project_details_screen.dart';
 
 class ProjectsList extends StatelessWidget {
@@ -13,6 +14,7 @@ class ProjectsList extends StatelessWidget {
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (BuildContext context, int index) {
+            ///Check if the current index is last element of the list, if yes return true.
             bool addProjectChecker =
                 projectData.projectLists[index].name == "Add Project";
             return GestureDetector(
@@ -71,12 +73,18 @@ class ProjectsList extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProjectDetailsScreen(
-                              project: projectData.projectLists[index],
-                            )));
+                addProjectChecker
+                    ? showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) => AddProjectScreen(),
+                      )
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProjectDetailsScreen(
+                                  project: projectData.projectLists[index],
+                                )));
               },
             );
           },
