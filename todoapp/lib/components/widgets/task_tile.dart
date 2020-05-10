@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/components/models/priority.dart';
 import 'package:todoapp/services/datetime.dart';
 
 /// Main 2 Feature:
@@ -10,11 +11,15 @@ class TaskTile extends StatelessWidget {
   final Function checkboxCallback;
   final Function longPressCallback;
 
-  TaskTile(
-      {this.isChecked,
-      this.taskTitle,
-      this.checkboxCallback,
-      this.longPressCallback});
+  //final Priority priorityIconData;
+
+  TaskTile({
+    this.isChecked,
+    this.taskTitle,
+    this.checkboxCallback,
+    this.longPressCallback,
+    //this.priorityIconData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +36,15 @@ class TaskTile extends StatelessWidget {
           ),
         ],
       ),
-      title: Text(
-        taskTitle,
-        style: TextStyle(
-            decoration: isChecked ? TextDecoration.lineThrough : null),
+      title: Row(
+        children: <Widget>[
+          Text(
+            taskTitle,
+            style: TextStyle(
+                decoration: isChecked ? TextDecoration.lineThrough : null),
+          ),
+          //Icon(priorityIconData.icon, color: priorityIconData.color)
+        ],
       ),
     );
   }

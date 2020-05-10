@@ -1,12 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoapp/components/models/task.dart';
+import 'package:todoapp/providers/priority_data.dart';
+import 'package:todoapp/providers/proejct_data.dart';
 import 'package:todoapp/providers/task_data.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String _currentSelectedValue;
+  String _currentSelectedPriorityValue;
+
   @override
   Widget build(BuildContext context) {
     String taskTitle;
+
+    List<String> _projects = [];
+    Provider.of<ProjectData>(context).projectLists.forEach((element) =>
+        element.name == "Add Project" ? null : _projects.add(element.name));
+
+    List<String> _priority = [];
+    Provider.of<TaskData>(context).priorities.forEach((element) =>
+        element.name == "None" ? null : _priority.add(element.name));
+
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -60,43 +80,90 @@ class AddTaskScreen extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black12,
-                          border: InputBorder.none,
-                          //icon: Icon(Icons.category),
-                          labelText: "Add Category"),
-                      textAlign: TextAlign.start,
-                      onChanged: (newProject) {},
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  color: Colors.redAccent, fontSize: 16.0),
+                              labelText: "Add Project",
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Colors.black12,
+                            ),
+                            isEmpty: _currentSelectedValue == '',
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _currentSelectedValue,
+                                isDense: true,
+                                onChanged: (newSelectedPriority) {
+                                  setState(() {
+                                    _currentSelectedValue = newSelectedPriority;
+                                    state.didChange(newSelectedPriority);
+                                  });
+                                },
+                                items: _projects.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                      )),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black12,
-                          border: InputBorder.none,
-                          //icon: Icon(Icons.priority_high),
-                          labelText: "Add Priority"),
-                      textAlign: TextAlign.start,
-                      onChanged: (newProject) {},
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  color: Colors.redAccent, fontSize: 16.0),
+                              labelText: "Add Priority",
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Colors.black12,
+                            ),
+                            isEmpty: _currentSelectedPriorityValue == '',
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _currentSelectedPriorityValue,
+                                isDense: true,
+                                onChanged: (newSelectedPriority) {
+                                  setState(() {
+                                    _currentSelectedPriorityValue =
+                                        newSelectedPriority;
+                                    state.didChange(newSelectedPriority);
+                                  });
+                                },
+                                items: _priority.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                      )),
                 ),
               ],
             ),
             TextField(
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black.withOpacity(0.1),
                 border: InputBorder.none,
                 labelText: "Add a Description",
                 labelStyle: TextStyle(
                   fontSize: 15,
-                  color: Colors.black38,
+                  color: Colors.black45,
                 ),
               ),
               textAlign: TextAlign.start,
@@ -113,7 +180,7 @@ class AddTaskScreen extends StatelessWidget {
               color: Colors.blue[500],
               onPressed: () {
                 Provider.of<TaskData>(context, listen: false)
-                    .addTask(taskTitle);
+                    .addTask(taskTitle /*, _currentSelectedPriorityValue*/);
                 Navigator.pop(context);
               },
             ),

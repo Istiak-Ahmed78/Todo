@@ -12,7 +12,7 @@ class ProjectsList extends StatelessWidget {
         return GridView.builder(
           itemCount: projectData.projectCount,
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
             ///Check if the current index is last element of the list, if yes return true.
             bool addProjectChecker =
