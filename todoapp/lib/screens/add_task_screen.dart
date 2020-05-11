@@ -14,17 +14,17 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   String _currentSelectedValue;
   String _currentSelectedPriorityValue;
+  String taskTitle;
 
   @override
   Widget build(BuildContext context) {
-    String taskTitle;
-
+    //String selectedPriority;
     List<String> _projects = [];
     Provider.of<ProjectData>(context).projectLists.forEach((element) =>
         element.name == "Add Project" ? null : _projects.add(element.name));
 
     List<String> _priority = [];
-    Provider.of<TaskData>(context).priorities.forEach((element) =>
+    priorities.forEach((element) =>
         element.name == "None" ? null : _priority.add(element.name));
 
     return Container(
@@ -180,7 +180,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               color: Colors.blue[500],
               onPressed: () {
                 Provider.of<TaskData>(context, listen: false)
-                    .addTask(taskTitle /*, _currentSelectedPriorityValue*/);
+                    .addTask(taskTitle, _currentSelectedPriorityValue);
                 Navigator.pop(context);
               },
             ),

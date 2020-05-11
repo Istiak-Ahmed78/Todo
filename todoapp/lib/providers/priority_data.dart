@@ -1,7 +1,9 @@
-/*import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/components/models/priority.dart';
 import 'dart:collection';
+
+import 'package:todoapp/components/models/task.dart';
 
 class PriorityData extends ChangeNotifier {
   var _selectedPriority;
@@ -20,6 +22,7 @@ class PriorityData extends ChangeNotifier {
   selectedPriority(String priority) {
     if (priority == "Low") {
       _selectedPriority = _priorities[0];
+
       //notifyListeners();
     } else if (priority == "Medium") {
       _selectedPriority = _priorities[1];
@@ -31,4 +34,4 @@ class PriorityData extends ChangeNotifier {
   }
 
   get getSelectedPriority => _selectedPriority ?? _priorities[3];
-}*/
+}

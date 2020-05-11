@@ -4,36 +4,38 @@ import 'package:todoapp/components/models/priority.dart';
 import '../components/models/task.dart';
 import 'dart:collection';
 
+List<Priority> priorities = [
+  Priority(name: "Low", color: Colors.yellow, icon: Icons.priority_high),
+  Priority(
+      name: "Medium",
+      color: Colors.deepOrangeAccent,
+      icon: Icons.priority_high),
+  Priority(name: "High", color: Colors.red, icon: Icons.priority_high),
+  Priority(name: "None", color: Colors.black12, icon: Icons.priority_high)
+];
+
 class TaskData extends ChangeNotifier {
-  //var _selectedPriority;
+  var _selectedPriority;
 
   List<Task> _tasks = [
-    Task(name: "Buy Milk"),
-    Task(name: "Buy Milk"),
-    Task(name: "Buy Milk"),
+    Task(name: "Buy Milk", priority: priorities[3]),
+    Task(name: "Buy Milk", priority: priorities[3]),
+    Task(name: "Buy Milk", priority: priorities[3]),
   ];
 
-  List<Priority> _priorities = [
-    Priority(name: "Low", color: Colors.orange, icon: Icons.priority_high),
-    Priority(
-        name: "Medium", color: Colors.deepOrange, icon: Icons.priority_high),
-    Priority(name: "High", color: Colors.red, icon: Icons.priority_high),
-    Priority(name: "None", color: Colors.black12, icon: Icons.priority_high)
-  ];
-
-  void addTask(String newTaskTitle /*, String priority*/) {
-    final task = Task(name: newTaskTitle);
-    _tasks.add(task);
-    /*if (priority == "Low") {
-      _selectedPriority = _priorities[0];
+  void addTask(String newTaskTitle, String priority) {
+    if (priority == "Low") {
+      _selectedPriority = priorities[0];
       //notifyListeners();
     } else if (priority == "Medium") {
-      _selectedPriority = _priorities[1];
+      _selectedPriority = priorities[1];
       //notifyListeners();
     } else if (priority == "High") {
-      _selectedPriority = _priorities[2];
+      _selectedPriority = priorities[2];
       //notifyListeners();
-    }*/
+    }
+    final task = Task(name: newTaskTitle, priority: _selectedPriority);
+    _tasks.add(task);
     notifyListeners();
   }
 
@@ -50,9 +52,4 @@ class TaskData extends ChangeNotifier {
   UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
 
   int get taskCount => _tasks.length;
-
-  UnmodifiableListView<Priority> get priorities =>
-      UnmodifiableListView(_priorities);
-
-  //get getSelectedPriority => _selectedPriority ?? _priorities[3];
 }

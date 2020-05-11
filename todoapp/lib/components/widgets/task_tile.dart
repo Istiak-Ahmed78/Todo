@@ -10,15 +10,14 @@ class TaskTile extends StatelessWidget {
   final String taskTitle;
   final Function checkboxCallback;
   final Function longPressCallback;
-
-  //final Priority priorityIconData;
+  final Priority priorityIconData;
 
   TaskTile({
     this.isChecked,
     this.taskTitle,
     this.checkboxCallback,
     this.longPressCallback,
-    //this.priorityIconData,
+    this.priorityIconData,
   });
 
   @override
@@ -37,13 +36,14 @@ class TaskTile extends StatelessWidget {
         ],
       ),
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             taskTitle,
             style: TextStyle(
                 decoration: isChecked ? TextDecoration.lineThrough : null),
           ),
-          //Icon(priorityIconData.icon, color: priorityIconData.color)
+          Icon(priorityIconData.icon, color: priorityIconData.color)
         ],
       ),
     );

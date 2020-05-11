@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => TaskData()),
         ChangeNotifierProvider(create: (_) => ProjectData()),
-        //ChangeNotifierProvider(create: (_) => PriorityData()),
+        ChangeNotifierProvider(create: (_) => PriorityData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
