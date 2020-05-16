@@ -29,6 +29,9 @@ dependencies:
   persistent_bottom_nav_bar: ^1.5.4
   font_awesome_flutter: ^8.8.1
   firebase_core:
+  path_provider:
+  data_connection_checker:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

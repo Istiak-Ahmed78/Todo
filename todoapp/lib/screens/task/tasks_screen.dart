@@ -1,3 +1,4 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/components/widgets/calendar.dart';
 import 'package:todoapp/components/widgets/circular_avatar.dart';
@@ -48,6 +49,23 @@ class _TasksScreenState extends State<TasksScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Visibility(
+              visible: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected,
+              child: Container(
+                color: Colors.red,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "No Internet Available!",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
             ///Holds Date, Greetings, Username, User Profile Picture
             ///Total no of tasks and Calendar
             Container(
@@ -70,11 +88,14 @@ class _TasksScreenState extends State<TasksScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         ///DateTime
-                        Text(
-                          dateTimeService.ddddyyMMMM,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            dateTimeService.ddddyyMMMM,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                         SizedBox(height: 10),

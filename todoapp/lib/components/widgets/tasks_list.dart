@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/components/widgets/task_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/priority_data.dart';
 import 'package:todoapp/providers/task_data.dart';
 
 ///Simply builds a List using listView Builder.

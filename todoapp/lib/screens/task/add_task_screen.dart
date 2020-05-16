@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/components/models/task.dart';
-import 'package:todoapp/providers/priority_data.dart';
 import 'package:todoapp/providers/proejct_data.dart';
 import 'package:todoapp/providers/task_data.dart';
 
@@ -18,7 +16,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //String selectedPriority;
     List<String> _projects = [];
     Provider.of<ProjectData>(context).projectLists.forEach((element) =>
         element.name == "Add Project" ? null : _projects.add(element.name));

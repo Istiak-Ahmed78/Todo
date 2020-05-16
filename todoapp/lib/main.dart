@@ -1,9 +1,10 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/priority_data.dart';
 import 'package:todoapp/providers/proejct_data.dart';
 import 'package:todoapp/providers/task_data.dart';
 import 'package:todoapp/screens/navigator_screen.dart';
+import 'package:todoapp/services/data_connectivity.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => TaskData()),
         ChangeNotifierProvider(create: (_) => ProjectData()),
-        ChangeNotifierProvider(create: (_) => PriorityData()),
+        StreamProvider<DataConnectionStatus>(
+            create: (_) =>
+                DataConnectivityService().connectivityStreamController.stream)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

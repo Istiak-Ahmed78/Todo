@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/components/models/priority.dart';
+import 'package:todoapp/services/storage.dart';
 import '../components/models/task.dart';
 import 'dart:collection';
 
@@ -11,7 +12,7 @@ List<Priority> priorities = [
       color: Colors.deepOrangeAccent,
       icon: Icons.priority_high),
   Priority(name: "High", color: Colors.red, icon: Icons.priority_high),
-  Priority(name: "None", color: Colors.black12, icon: Icons.priority_high)
+  Priority(name: "None", color: Colors.white, icon: Icons.priority_high)
 ];
 
 class TaskData extends ChangeNotifier {
@@ -33,9 +34,12 @@ class TaskData extends ChangeNotifier {
     } else if (priority == "High") {
       _selectedPriority = priorities[2];
       //notifyListeners();
+    } else {
+      _selectedPriority = priorities[3];
     }
     final task = Task(name: newTaskTitle, priority: _selectedPriority);
     _tasks.add(task);
+    writeContent(newTaskTitle);
     notifyListeners();
   }
 
@@ -46,6 +50,7 @@ class TaskData extends ChangeNotifier {
 
   void deleteTask(Task task) {
     _tasks.remove(task);
+    readcontent().then((content) => print(content));
     notifyListeners();
   }
 

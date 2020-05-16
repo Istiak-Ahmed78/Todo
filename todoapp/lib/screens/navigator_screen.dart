@@ -3,10 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/models/persisten-bottom-nav-item.widget.dart';
 import 'package:persistent_bottom_nav_bar/models/persistent-nav-bar-scaffold.widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 import 'package:todoapp/components/widgets/custom_widget.dart';
 import 'package:todoapp/screens/profile_screen.dart';
-import 'package:todoapp/screens/projects_screen.dart';
-import 'package:todoapp/screens/tasks_screen.dart';
+import 'package:todoapp/screens/project/projects_screen.dart';
+import 'package:todoapp/screens/task/tasks_screen.dart';
 
 class NavigatorScreen extends StatefulWidget {
   NavigatorScreen({Key key}) : super(key: key);
