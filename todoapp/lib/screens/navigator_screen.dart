@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:persistent_bottom_nav_bar/models/persisten-bottom-nav-item.widget.dart';
-import 'package:persistent_bottom_nav_bar/models/persistent-nav-bar-scaffold.widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 import 'package:todoapp/components/widgets/custom_widget.dart';
 import 'package:todoapp/screens/profile_screen.dart';
 import 'package:todoapp/screens/project/projects_screen.dart';
@@ -40,21 +37,18 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
         title: ("Tasks"),
         activeColor: Colors.teal,
         inactiveColor: Colors.grey,
-        isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
         icon: FaIcon(FontAwesomeIcons.projectDiagram),
         title: ("Projects"),
         activeColor: Colors.deepOrange,
         inactiveColor: Colors.grey,
-        isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.person),
         title: ("Profile"),
         activeColor: Colors.indigo,
         inactiveColor: Colors.grey,
-        isTranslucent: false,
       ),
     ];
   }
