@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/proejct_data.dart';
+import 'package:todoapp/providers/project_data.dart';
 import 'package:todoapp/providers/task_data.dart';
 
 class AddTaskScreen extends StatefulWidget {
