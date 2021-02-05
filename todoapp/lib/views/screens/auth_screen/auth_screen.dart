@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/screens/auth_screen/login_form.dart';
-import 'package:todoapp/screens/auth_screen/signup_form.dart';
+
+import 'login_form.dart';
+import 'signup_form.dart';
+
 
 class AuthScreen extends StatefulWidget {
   @override

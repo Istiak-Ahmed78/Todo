@@ -1,12 +1,13 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/auth_provider.dart';
-import 'package:todoapp/providers/project_data.dart';
-import 'package:todoapp/providers/task_data.dart';
-import 'package:todoapp/screens/auth_screen/auth_screen.dart';
+
+import 'state_manager/auth_provider.dart';
+import 'state_manager/project_data.dart';
+import 'state_manager/task_data.dart';
+import 'views/screens/auth_screen/auth_screen.dart';
 import 'package:todoapp/services/data_connectivity.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +18,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /// Everything related to Tasks is handled by TaskData.
-    /// Provider is used for State Management Helper.
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TaskData()),
         ChangeNotifierProvider(create: (_) => ProjectData()),
         ChangeNotifierProvider(create: (_) => Auth()),
-        StreamProvider<DataConnectionStatus>(
-            create: (_) =>
-                DataConnectivityService().connectivityStreamController.stream)
+        StreamProvider<DataConnectionStatus>(create: (_) => DataConnectivityService().connectivityStreamController.stream)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: NavigatorScreen(),
+        //TODO: Log In Check
         home: AuthScreen(),
       ),
     );

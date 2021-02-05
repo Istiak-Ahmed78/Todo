@@ -5,8 +5,5 @@ class Priority {
   final Color color;
   final IconData icon;
 
-  Priority(
-      {this.name = "low",
-      this.color = Colors.orange,
-      this.icon = Icons.priority_high});
+  Priority({this.name = "low", this.color = Colors.orange, this.icon = Icons.priority_high});
 }

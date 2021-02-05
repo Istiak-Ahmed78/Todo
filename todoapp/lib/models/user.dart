@@ -6,10 +6,5 @@ class UserModel {
   String email;
   Timestamp accountCreated;
 
-  UserModel({
-    this.uid,
-    this.fullName,
-    this.email,
-    this.accountCreated,
-  });
+  UserModel({this.uid, this.fullName, this.email, this.accountCreated});
 }

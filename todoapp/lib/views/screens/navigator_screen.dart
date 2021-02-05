@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:todoapp/components/widgets/custom_widget.dart';
-import 'package:todoapp/screens/profile_screen.dart';
-import 'package:todoapp/screens/project/projects_screen.dart';
-import 'package:todoapp/screens/task/tasks_screen.dart';
+import 'package:todoapp/views/widgets/shared_widgets.dart';
+import 'profile_screen.dart';
+import 'project/projects_screen.dart';
+import 'task/tasks_screen.dart';
 
 class NavigatorScreen extends StatefulWidget {
   NavigatorScreen({Key key}) : super(key: key);
@@ -21,14 +21,13 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
     return PersistentTabView(
         controller: _controller,
         screens: _buildScreens(),
-        items:
-            _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
+        items: _navBarsItems(),
+        // Redundant here but defined to demonstrate for other than custom style
         confineInSafeArea: true,
         backgroundColor: Colors.white,
         handleAndroidBackButtonPress: true,
         onItemSelected: (int) {
-          setState(
-              () {}); // This is required to update the nav bar if Android back button is pressed
+          setState(() {}); // This is required to update the nav bar if Android back button is pressed
         },
         customWidget: CustomNavBarWidget(
           items: _navBarsItems(),
@@ -40,8 +39,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
           selectedIndex: _controller.index,
         ),
         itemCount: 4,
-        navBarStyle:
-            NavBarStyle.custom // Choose the nav bar style with this property
+        navBarStyle: NavBarStyle.custom // Choose the nav bar style with this property
         );
   }
 

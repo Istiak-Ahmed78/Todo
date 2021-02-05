@@ -7,7 +7,7 @@ import 'package:todoapp/services/db.dart';
 class Auth extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Stream<UserModel> get currenUser => FirebaseFirestore.instance
+  Stream<UserModel> get currentUser => FirebaseFirestore.instance
       .collection('users')
       .doc(_auth.currentUser.uid)
       .snapshots()

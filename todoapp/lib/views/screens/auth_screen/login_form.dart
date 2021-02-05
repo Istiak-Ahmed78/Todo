@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/components/utils/constants.dart';
 import 'package:todoapp/models/user.dart';
-import 'package:todoapp/providers/auth_provider.dart';
-import 'package:todoapp/screens/navigator_screen.dart';
+import 'package:todoapp/state_manager/auth_provider.dart';
+import 'package:todoapp/utils/constants.dart';
+
+import '../navigator_screen.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => StreamProvider<UserModel>.value(
           initialData: UserModel(fullName: ""),
-          value: _user.currenUser,
+          value: _user.currentUser,
           child: NavigatorScreen(),
         ),
       ));

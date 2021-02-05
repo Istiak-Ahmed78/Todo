@@ -24,8 +24,7 @@ class DataBase {
     UserModel output = UserModel();
 
     try {
-      DocumentSnapshot _docSnapshot =
-          await _firestore.collection("users").doc(uid).get();
+      DocumentSnapshot _docSnapshot = await _firestore.collection("users").doc(uid).get();
       output.uid = uid;
       output.fullName = _docSnapshot.data()["fullName"];
       output.email = _docSnapshot.data()["email"];

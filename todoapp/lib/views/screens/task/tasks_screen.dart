@@ -1,12 +1,10 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/components/widgets/calendar.dart';
-import 'package:todoapp/components/widgets/circular_avatar.dart';
-import 'package:todoapp/components/widgets/tasks_list.dart';
 import 'package:todoapp/models/user.dart';
-import 'package:todoapp/providers/task_data.dart';
 import 'package:todoapp/services/datetime.dart';
+import 'package:todoapp/state_manager/task_data.dart';
+import 'package:todoapp/views/widgets/shared_widgets.dart';
 
 import 'add_task_screen.dart';
 

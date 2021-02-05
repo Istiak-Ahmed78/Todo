@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/components/widgets/calendar.dart';
-import 'package:todoapp/components/widgets/projects_list.dart';
-import 'package:todoapp/providers/project_data.dart';
+
+import 'package:todoapp/state_manager/project_data.dart';
+import 'package:todoapp/views/widgets/shared_widgets.dart';
 
 class ProjectScreen extends StatelessWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/components/utils/constants.dart';
-import 'package:todoapp/providers/auth_provider.dart';
+import 'package:todoapp/state_manager/auth_provider.dart';
+import 'package:todoapp/utils/constants.dart';
 
 class SignUpForm extends StatefulWidget {
   @override

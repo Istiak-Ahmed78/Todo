@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/project_data.dart';
-import 'package:todoapp/screens/project/add_project_screen.dart';
-import 'package:todoapp/screens/project/project_details_screen.dart';
+import 'package:todoapp/state_manager/project_data.dart';
+import 'package:todoapp/views/screens/project/add_project_screen.dart';
+import 'package:todoapp/views/screens/project/project_details_screen.dart';
 
 class ProjectsList extends StatelessWidget {
   @override
@@ -11,12 +11,10 @@ class ProjectsList extends StatelessWidget {
       builder: (context, projectData, child) {
         return GridView.builder(
           itemCount: projectData.projectCount,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
             ///Check if the current index is last element of the list, if yes return true.
-            bool addProjectChecker =
-                projectData.projectLists[index].name == "Add Project";
+            bool addProjectChecker = projectData.projectLists[index].name == "Add Project";
             return GestureDetector(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -35,8 +33,7 @@ class ProjectsList extends StatelessWidget {
                         ///Project Icon
                         Icon(
                           projectData.projectLists[index].iconData,
-                          color:
-                              addProjectChecker ? Colors.black45 : Colors.white,
+                          color: addProjectChecker ? Colors.black45 : Colors.white,
                           size: 20,
                         ),
                         SizedBox(
@@ -46,12 +43,7 @@ class ProjectsList extends StatelessWidget {
                         ///Project Name
                         Text(
                           "${projectData.projectLists[index].name}",
-                          style: TextStyle(
-                              color: addProjectChecker
-                                  ? Colors.black45
-                                  : Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          style: TextStyle(color: addProjectChecker ? Colors.black45 : Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         SizedBox(
                           height: 10,
@@ -62,10 +54,7 @@ class ProjectsList extends StatelessWidget {
                             ? Text("")
                             : Text(
                                 "No of Tasks",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15),
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),
                               ),
                       ],
                     ),
@@ -87,10 +76,7 @@ class ProjectsList extends StatelessWidget {
                                 )));
               },
               onLongPress: () {
-                addProjectChecker
-                    ? Container()
-                    : projectData
-                        .deleteProject(projectData.projectLists[index]);
+                addProjectChecker ? Container() : projectData.deleteProject(projectData.projectLists[index]);
               },
             );
           },

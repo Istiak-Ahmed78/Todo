@@ -7,10 +7,7 @@ import 'dart:collection';
 
 List<Priority> priorities = [
   Priority(name: "Low", color: Colors.yellow, icon: Icons.priority_high),
-  Priority(
-      name: "Medium",
-      color: Colors.deepOrangeAccent,
-      icon: Icons.priority_high),
+  Priority(name: "Medium", color: Colors.deepOrangeAccent, icon: Icons.priority_high),
   Priority(name: "High", color: Colors.red, icon: Icons.priority_high),
   Priority(name: "None", color: Colors.white, icon: Icons.priority_high)
 ];
@@ -27,13 +24,10 @@ class TaskData extends ChangeNotifier {
   void addTask(String newTaskTitle, String priority) {
     if (priority == "Low") {
       _selectedPriority = priorities[0];
-      //notifyListeners();
     } else if (priority == "Medium") {
       _selectedPriority = priorities[1];
-      //notifyListeners();
     } else if (priority == "High") {
       _selectedPriority = priorities[2];
-      //notifyListeners();
     } else {
       _selectedPriority = priorities[3];
     }

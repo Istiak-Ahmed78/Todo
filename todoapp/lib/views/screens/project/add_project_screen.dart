@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoapp/providers/project_data.dart';
+import 'package:todoapp/state_manager/project_data.dart';
 
 class AddProjectScreen extends StatelessWidget {
   @override
