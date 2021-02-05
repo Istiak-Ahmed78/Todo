@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/components/models/project.dart';
+import 'package:todoapp/models/project.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
   final Project project;

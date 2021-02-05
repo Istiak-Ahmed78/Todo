@@ -1,12 +1,14 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoapp/components/widgets/calendar.dart';
 import 'package:todoapp/components/widgets/circular_avatar.dart';
 import 'package:todoapp/components/widgets/tasks_list.dart';
-import 'package:provider/provider.dart';
-import 'package:todoapp/services/datetime.dart';
-import 'add_task_screen.dart';
+import 'package:todoapp/models/user.dart';
 import 'package:todoapp/providers/task_data.dart';
+import 'package:todoapp/services/datetime.dart';
+
+import 'add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -15,7 +17,6 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   int index = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,12 +105,14 @@ class _TasksScreenState extends State<TasksScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             ///Greetings and Name
-                            Text(
-                              'GOOD MORNING\nSARAH',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.w700),
+                            Consumer<UserModel>(
+                              builder: (context, value, child) => Text(
+                                'GOOD MORNING\n${value.fullName.toUpperCase()}',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
 
                             ///User Avatar

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:todoapp/components/models/priority.dart';
+import 'package:todoapp/models/priority.dart';
+import 'package:todoapp/models/task.dart';
 import 'package:todoapp/services/storage.dart';
-import '../components/models/task.dart';
 import 'dart:collection';
 
 List<Priority> priorities = [

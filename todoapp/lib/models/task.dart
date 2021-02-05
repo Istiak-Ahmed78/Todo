@@ -1,4 +1,4 @@
-import 'package:todoapp/components/models/priority.dart';
+import 'package:todoapp/models/priority.dart';
 
 class Task {
   final String name;

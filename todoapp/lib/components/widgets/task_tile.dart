@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/components/models/priority.dart';
+import 'package:todoapp/models/priority.dart';
 import 'package:todoapp/services/datetime.dart';
 
 /// Main 2 Feature:

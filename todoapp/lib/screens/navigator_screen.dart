@@ -17,6 +17,35 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   PersistentTabController _controller;
 
   @override
+  Widget build(BuildContext context) {
+    return PersistentTabView(
+        controller: _controller,
+        screens: _buildScreens(),
+        items:
+            _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
+        confineInSafeArea: true,
+        backgroundColor: Colors.white,
+        handleAndroidBackButtonPress: true,
+        onItemSelected: (int) {
+          setState(
+              () {}); // This is required to update the nav bar if Android back button is pressed
+        },
+        customWidget: CustomNavBarWidget(
+          items: _navBarsItems(),
+          onItemSelected: (index) {
+            setState(() {
+              _controller.index = index; // THIS IS CRITICAL!! Don't miss it!
+            });
+          },
+          selectedIndex: _controller.index,
+        ),
+        itemCount: 4,
+        navBarStyle:
+            NavBarStyle.custom // Choose the nav bar style with this property
+        );
+  }
+
+  @override
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
@@ -51,34 +80,5 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
         inactiveColor: Colors.grey,
       ),
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return PersistentTabView(
-        controller: _controller,
-        screens: _buildScreens(),
-        items:
-            _navBarsItems(), // Redundant here but defined to demonstrate for other than custom style
-        confineInSafeArea: true,
-        backgroundColor: Colors.white,
-        handleAndroidBackButtonPress: true,
-        onItemSelected: (int) {
-          setState(
-              () {}); // This is required to update the nav bar if Android back button is pressed
-        },
-        customWidget: CustomNavBarWidget(
-          items: _navBarsItems(),
-          onItemSelected: (index) {
-            setState(() {
-              _controller.index = index; // THIS IS CRITICAL!! Don't miss it!
-            });
-          },
-          selectedIndex: _controller.index,
-        ),
-        itemCount: 4,
-        navBarStyle:
-            NavBarStyle.custom // Choose the nav bar style with this property
-        );
   }
 }

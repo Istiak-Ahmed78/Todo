@@ -19,10 +19,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore:
   cupertino_icons: ^0.1.2
   data_connection_checker:
   firebase_auth: ^0.18.0
   firebase_core:
+  firebase_messaging:
   flutter_calendar_carousel:
   font_awesome_flutter: ^8.8.1
   intl:
