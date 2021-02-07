@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import 'services/data_connectivity.dart';
 import 'state_manager/auth_provider.dart';
-import 'state_manager/project_data.dart';
 import 'state_manager/task_data.dart';
 import 'views/screens/auth_screen/auth_screen.dart';
 
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TaskData()),
-        ChangeNotifierProvider(create: (_) => ProjectData()),
+        //ChangeNotifierProvider(create: (_) => ProjectData()),
         ChangeNotifierProvider(create: (_) => Auth()),
         StreamProvider<DataConnectionStatus>(
             create: (_) =>
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        //TODO: Log In Check
+        //TODO: Log In Check, If logged in need to route to TaskScreen
         home: AuthScreen(),
       ),
     );

@@ -13,6 +13,7 @@ class TasksList extends StatelessWidget {
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
         return ListView.builder(
+          scrollDirection: Axis.vertical,
           padding: EdgeInsets.all(0.0),
           itemCount: taskData.taskCount,
           itemBuilder: (context, index) {

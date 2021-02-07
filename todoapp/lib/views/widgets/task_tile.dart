@@ -1,6 +1,6 @@
+import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/models/priority.dart';
-import 'package:todoapp/services/datetime.dart';
 
 /// Main 2 Feature:
 /// longPressToDelete & Current time of adding task
@@ -22,28 +22,29 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return InkWell(
       onLongPress: longPressCallback,
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(dateTimeService.currentTime),
-          Checkbox(
-            activeColor: Colors.lightBlueAccent,
-            value: isChecked,
-            onChanged: checkboxCallback,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              CircularCheckBox(
+                activeColor: Colors.green,
+                value: isChecked,
+                onChanged: checkboxCallback,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              Flexible(
+                child: Text(
+                  taskTitle,
+                  style: TextStyle(decoration: isChecked ? TextDecoration.lineThrough : null),
+                ),
+              ),
+              //Icon(priorityIconData.icon, color: priorityIconData.color)
+            ],
           ),
-        ],
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            taskTitle,
-            style: TextStyle(
-                decoration: isChecked ? TextDecoration.lineThrough : null),
-          ),
-          Icon(priorityIconData.icon, color: priorityIconData.color)
+          Divider(height: 1),
         ],
       ),
     );

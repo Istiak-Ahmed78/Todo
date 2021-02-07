@@ -177,7 +177,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               color: Colors.blue[500],
               onPressed: () {
                 Provider.of<TaskData>(context, listen: false)
-                    .addTask(taskTitle, _currentSelectedPriorityValue);
+                    .addTask(taskTitle);
                 Navigator.pop(context);
               },
             ),

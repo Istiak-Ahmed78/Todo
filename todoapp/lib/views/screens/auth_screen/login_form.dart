@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:todoapp/models/user.dart';
 import 'package:todoapp/state_manager/auth_provider.dart';
 import 'package:todoapp/utils/constants.dart';
+import 'package:todoapp/views/screens/task/tasks_screen.dart';
 
-import '../navigator_screen.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -60,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
         builder: (context) => StreamProvider<UserModel>.value(
           initialData: UserModel(fullName: ""),
           value: _user.currentUser,
-          child: NavigatorScreen(),
+          child: TasksScreen(),
         ),
       ));
       //TODO: next page e jabar functionality add korte hobe.

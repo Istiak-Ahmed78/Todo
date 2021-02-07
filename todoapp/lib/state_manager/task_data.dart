@@ -16,12 +16,12 @@ class TaskData extends ChangeNotifier {
   var _selectedPriority;
 
   List<Task> _tasks = [
-    Task(name: "Buy Milk", priority: priorities[3]),
-    Task(name: "Buy Milk", priority: priorities[3]),
-    Task(name: "Buy Milk", priority: priorities[3]),
+    Task(name: "Click the + button to add task", ),
+    Task(name: "long press to delete", ),
+    Task(name: "Be productive all day", ),
   ];
 
-  void addTask(String newTaskTitle, String priority) {
+  void addTask(String newTaskTitle, {String priority}) {
     if (priority == "Low") {
       _selectedPriority = priorities[0];
     } else if (priority == "Medium") {

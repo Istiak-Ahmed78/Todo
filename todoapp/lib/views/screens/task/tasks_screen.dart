@@ -5,8 +5,7 @@ import 'package:todoapp/models/user.dart';
 import 'package:todoapp/services/datetime.dart';
 import 'package:todoapp/state_manager/task_data.dart';
 import 'package:todoapp/views/widgets/shared_widgets.dart';
-
-import 'add_task_screen.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -15,155 +14,107 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   int index = 0;
+  String task;
+  final taskFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
-
-      /// AppBar is kept simple. We will use SVG format custom icon for the
-      /// leading icon. Otherwise, we can check packages for custom icon that
-      /// matches our design
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.black,
+        titleSpacing: 0,
+        title: Consumer<UserModel>(
+          builder: (context, value, child) => FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text(
+              'Hey there, ${value.fullName.split(' ')[0].toString()}',
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+            ).pOnly(left: 15),
+          ),
         ),
-      ),
-
-      /// Brings up a bottomSheet and triggers AddTaskScreen.
-      /// AddTaskScreen handles adding task via provider
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlueAccent,
-        child: Icon(Icons.add),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => AddTaskScreen(),
-          );
-        },
+        actions: [
+          CircleAvatar(
+                  backgroundColor: Colors.orange.withOpacity(0.15), foregroundColor: Colors.black, radius: 15, child: Icon(Icons.person, size: 20))
+              .pOnly(right: 15)
+        ],
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Visibility(
-              visible: Provider.of<DataConnectionStatus>(context) ==
-                  DataConnectionStatus.disconnected,
-              child: Container(
-                color: Colors.red,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      "No Internet Available!",
-                      style: TextStyle(color: Colors.white),
-                    ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Visibility(
+                  visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
+                  child: Container(
+                    color: Colors.red,
+                    child: Center(child: Padding(padding: const EdgeInsets.all(10.0), child: Icon(Icons.wifi_off))),
                   ),
                 ),
-              ),
-            ),
-
-            ///Holds Date, Greetings, Username, User Profile Picture
-            ///Total no of tasks and Calendar
-            Container(
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 25.0, // soften the shadow
-                  spreadRadius: 2.0,
-                  offset: Offset(
-                    0.0, // Move to right 10  horizontally
-                    15.0, // Move to bottom 10 Vertically
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(dateTimeService.ddddyyMMMM, style: TextStyle(color: Colors.black)).pOnly(bottom: 5),
+                    Text('${Provider.of<TaskData>(context).taskCount} Tasks', style: TextStyle(color: Colors.black)),
+                  ],
+                ).px(15),
+                SizedBox(height: 10),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 5, right: 5, top: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.orange.withOpacity(0.15),
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
+                    child: TasksList(),
                   ),
-                )
-              ]),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 20, bottom: 30, left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        ///DateTime
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Text(
-                            dateTimeService.ddddyyMMMM,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            ///Greetings and Name
-                            Consumer<UserModel>(
-                              builder: (context, value, child) => Text(
-                                'GOOD MORNING\n${value.fullName.toUpperCase()}',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-
-                            ///User Avatar
-                            CircularAvatar(
-                              url:
-                                  "https://randomuser.me/api/portraits/women/17.jpg",
-                            )
-                          ],
-                        ),
-
-                        ///Amount of Tasks left
-                        Text(
-                          '${Provider.of<TaskData>(context).taskCount} Tasks',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
+                ),
+                SizedBox(height: kToolbarHeight)
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                width: context.screenWidth,
+                decoration:
+                    BoxDecoration(color: Colors.black, borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
+                child: Column(
+                  children: [
+                    Divider(thickness: 2, height: 1).pOnly(top: 10),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            controller: taskFieldController,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.black,
+                                border: InputBorder.none,
+                                labelText: "Add Task",
+                                labelStyle: TextStyle(color: Colors.white)),
+                            textAlign: TextAlign.start,
+                            cursorWidth: 2.0,
+                            onEditingComplete: () {
+                              if (taskFieldController.text.isNotEmpty)
+                                Provider.of<TaskData>(context, listen: false).addTask(taskFieldController.text);
+                              taskFieldController.clear();
+                            },
                           ),
                         ),
                       ],
-                    ),
-                  ),
-
-                  ///Calendar widget
-                  Calendar(),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-
-            ///Holds TaskList
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(left: 5),
-                //color: Color(0xFFEFEFEF),
-                child: TasksList(),
+                    )
+                  ],
+                ),
               ),
             )
           ],
         ),
       ),
-
-      ///Work needed
-      /*bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        onTap: (index) => setState(() => this.index = index),
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.playlist_add), title: Text("")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.developer_board), title: Text("")),
-          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text("")),
-        ],
-      ),*/
     );
   }
 }

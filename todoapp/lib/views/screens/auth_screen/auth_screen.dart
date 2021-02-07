@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'login_form.dart';
 import 'signup_form.dart';
 
-
 class AuthScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<AuthScreen> {
-  String imgUrl =
-      "https://p.kindpng.com/picc/s/393-3933176_flutter-app-development-flutter-developer-hd-png-download.png";
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class _LoginScreenState extends State<AuthScreen> {
           child: ListView(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              Image.network(imgUrl, scale: 1.6),
+              Image.asset("assets/todo-app-logo.png", width: 150, height: 150),
               Container(
                 height: MediaQuery.of(context).size.height / 2,
                 child: Column(
@@ -32,7 +29,7 @@ class _LoginScreenState extends State<AuthScreen> {
                       labelColor: Colors.grey,
                       tabs: [
                         Tab(child: Text("Login")),
-                        Tab(child: Text("Signup")),
+                        Tab(child: Text("Sign-up")),
                       ],
                     ),
                     Expanded(
