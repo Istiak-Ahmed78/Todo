@@ -55,6 +55,7 @@ class _LoginFormState extends State<LoginForm> {
         : await _user.loginUserWithEmail(email: email, password: password);
     print("ok");
     if (output == "ok") {
+
       _showSnackBar("Login Successful. Please Log in now.");
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => StreamProvider<UserModel>.value(

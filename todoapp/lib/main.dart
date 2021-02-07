@@ -2,6 +2,7 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoapp/views/screens/startup/splash_screen.dart';
 
 import 'services/data_connectivity.dart';
 import 'state_manager/auth_provider.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         //TODO: Log In Check, If logged in need to route to TaskScreen
-        home: AuthScreen(),
+        home: SplashScreen(),
       ),
     );
   }
