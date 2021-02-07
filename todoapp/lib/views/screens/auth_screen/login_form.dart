@@ -32,18 +32,27 @@ class _LoginFormState extends State<LoginForm> {
         ),
         SizedBox(height: 8.0),
         RaisedButton(
-          onPressed: () => _login(_email, _password),
+          onPressed: () => _login(email: _email, password: _password),
           child: Text("Login"),
+        ),
+        RaisedButton(
+          onPressed: () => _login(isGoogle: true),
+          child: Text("Login with google"),
         ),
       ],
     );
   }
 
-  void _login(String email, String password) async {
+  void _login({
+    String email,
+    String password,
+    bool isGoogle = false,
+  }) async {
     FocusScope.of(context).unfocus();
     Auth _user = Provider.of<Auth>(context, listen: false);
-    String output =
-        await _user.loginUserWithEmail(email: _email, password: _password);
+    String output = isGoogle
+        ? await _user.loginWithGoogle()
+        : await _user.loginUserWithEmail(email: email, password: password);
     print("ok");
     if (output == "ok") {
       _showSnackBar("Login Successful. Please Log in now.");

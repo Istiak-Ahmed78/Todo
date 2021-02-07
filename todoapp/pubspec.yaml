@@ -27,6 +27,7 @@ dependencies:
   firebase_messaging:
   flutter_calendar_carousel:
   font_awesome_flutter: ^8.8.1
+  google_sign_in: ^4.5.9
   intl:
   path_provider:
   persistent_bottom_nav_bar: ^1.5.4

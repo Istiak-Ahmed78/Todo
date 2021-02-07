@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todoapp/models/user.dart';
 import 'package:todoapp/services/db.dart';
 
@@ -25,6 +26,37 @@ class Auth extends ChangeNotifier {
     } catch (e) {
       output = e.message;
     }
+    return output;
+  }
+
+  Future<String> loginWithGoogle() async {
+    String output = "error";
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
+    try {
+      GoogleSignInAccount googleUser = await googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+      UserCredential result = await _auth.signInWithCredential(credential);
+      if (result.additionalUserInfo.isNewUser) {
+        UserModel newUser = UserModel(
+          uid: result.user.uid,
+          fullName: result.user.displayName,
+          email: result.user.email,
+          accountCreated: Timestamp.now(),
+        );
+        output = await DataBase().createUser(newUser);
+      } else {
+        output = "ok";
+      }
+    } catch (e) {}
     return output;
   }
 

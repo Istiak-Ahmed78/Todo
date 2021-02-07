@@ -42,6 +42,10 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           child: Text("Signup"),
         ),
+        RaisedButton(
+          onPressed: () => _signUp(isGoogle: true),
+          child: Text("Signup with Google"),
+        ),
       ],
     );
   }
@@ -53,11 +57,14 @@ class _SignUpFormState extends State<SignUpForm> {
     String email,
     String password,
     String fullName,
+    bool isGoogle = false,
   }) async {
     FocusScope.of(context).unfocus();
     Auth _user = Provider.of<Auth>(context, listen: false);
-    String output = await _user.signUpUser(
-        email: _email, password: _password, fullName: _fullName);
+    String output = isGoogle
+        ? await _user.loginWithGoogle()
+        : await _user.signUpUser(
+            email: _email, password: _password, fullName: _fullName);
     if (output == "ok") {
       _showSnackBar("Signup Successful, Please Log in");
       //TODO: next page e jabar functionality add korte hobe.
