@@ -7,7 +7,6 @@ import 'package:todoapp/views/screens/startup/splash_screen.dart';
 import 'services/data_connectivity.dart';
 import 'state_manager/auth_provider.dart';
 import 'state_manager/task_data.dart';
-import 'views/screens/auth_screen/auth_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

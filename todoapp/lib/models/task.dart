@@ -1,11 +1,22 @@
 import 'package:todoapp/models/priority.dart';
 
 class Task {
-  final String name;
-  bool isDone;
+  String title;
+  String subtitle;
+  String assignedUid;
+  List<Task> subtasks;
+  DateTime deadLine;
   Priority priority;
-
-  Task({this.name, this.isDone = false, this.priority});
+  bool isDone;
+  Task({
+    this.title,
+    this.subtitle,
+    this.assignedUid,
+    this.subtasks,
+    this.deadLine,
+    this.priority,
+    this.isDone,
+  });
 
   void toggleDone() {
     isDone = !isDone;

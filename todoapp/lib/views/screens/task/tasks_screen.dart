@@ -31,13 +31,17 @@ class _TasksScreenState extends State<TasksScreen> {
             fit: BoxFit.fitWidth,
             child: Text(
               'Hey there, ${value.fullName.split(' ')[0].toString()}',
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
             ).pOnly(left: 15),
           ),
         ),
         actions: [
           CircleAvatar(
-                  backgroundColor: Colors.orange.withOpacity(0.15), foregroundColor: Colors.black, radius: 15, child: Icon(Icons.person, size: 20))
+                  backgroundColor: Colors.orange.withOpacity(0.15),
+                  foregroundColor: Colors.black,
+                  radius: 15,
+                  child: Icon(Icons.person, size: 20))
               .pOnly(right: 15)
         ],
       ),
@@ -48,17 +52,24 @@ class _TasksScreenState extends State<TasksScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Visibility(
-                  visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
+                  visible: Provider.of<DataConnectionStatus>(context) ==
+                      DataConnectionStatus.disconnected,
                   child: Container(
                     color: Colors.red,
-                    child: Center(child: Padding(padding: const EdgeInsets.all(10.0), child: Icon(Icons.wifi_off))),
+                    child: Center(
+                        child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Icon(Icons.wifi_off))),
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(dateTimeService.ddddyyMMMM, style: TextStyle(color: Colors.black)).pOnly(bottom: 5),
-                    Text('${Provider.of<TaskData>(context).taskCount} Tasks', style: TextStyle(color: Colors.black)),
+                    Text(dateTimeService.ddddyyMMMM,
+                            style: TextStyle(color: Colors.black))
+                        .pOnly(bottom: 5),
+                    Text('${Provider.of<TaskData>(context).taskCount} Tasks',
+                        style: TextStyle(color: Colors.black)),
                   ],
                 ).px(15),
                 SizedBox(height: 10),
@@ -67,7 +78,9 @@ class _TasksScreenState extends State<TasksScreen> {
                     padding: EdgeInsets.only(left: 5, right: 5, top: 10),
                     decoration: BoxDecoration(
                         color: Colors.orange.withOpacity(0.15),
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            topLeft: Radius.circular(10))),
                     child: TasksList(),
                   ),
                 ),
@@ -78,8 +91,11 @@ class _TasksScreenState extends State<TasksScreen> {
               bottom: 0,
               child: Container(
                 width: context.screenWidth,
-                decoration:
-                    BoxDecoration(color: Colors.black, borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10))),
                 child: Column(
                   children: [
                     Divider(thickness: 2, height: 1).pOnly(top: 10),
@@ -101,7 +117,8 @@ class _TasksScreenState extends State<TasksScreen> {
                             cursorWidth: 2.0,
                             onEditingComplete: () {
                               if (taskFieldController.text.isNotEmpty)
-                                Provider.of<TaskData>(context, listen: false).addTask(taskFieldController.text);
+                                Provider.of<TaskData>(context, listen: false)
+                                    .addTask(taskFieldController.text);
                               taskFieldController.clear();
                             },
                           ),
